@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.24632678155708387 -0.03035627041938498 0.9687113158903194 3.4157617350667575
-  position 0.30689030415245555 0.3462468042756117 0.7486222780500736
+  orientation -0.3958116768362616 0.04149386296113418 0.917393795388125 2.9724962316449024
+  position 0.08124951297382457 -0.05789298492231995 0.804026792465723
 }
 TexturedBackground {
 }
@@ -18,15 +18,22 @@ TexturedBackgroundLight {
 }
 RectangleArena {
   translation -0.13 0 0
-  floorSize 1.75 0.2
+  floorSize 1.75 0.1
   wallHeight 0.001
 }
 E-puck {
-  translation -0.87 0 0.01
+  hidden position_0_0 106.35175241764301
+  hidden position_0_1 106.35175191094243
+  hidden rotation_1 0 1 0 5.82078750276963
+  hidden rotation_2 0 1 0 5.820786996069042
+  translation -0.875653 -0.00183109 -0.000776366
+  rotation 2.3939685955035255e-06 -0.9999999736639869 -0.00022949138260500198 0.0011490564228172156
+  controller "Markov_Localization"
   groundSensorsSlot [
     DistanceSensor {
       translation 6.74634e-14 0 0.01
       rotation 0 1 0 1.5708
+      name "color0"
     }
   ]
 }
@@ -40,55 +47,55 @@ WoodenBox {
   size 0.01 0.2 0.15
 }
 WoodenBox {
-  translation -0.88 -0.11 0.07
+  translation -0.88 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(2)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.88 0.1 0.07
+  translation -0.88 0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(8)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.13 0.1 0.07
+  translation -0.13 0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(9)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation 0.37 0.1 0.07
+  translation 0.37 0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(10)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.63 -0.11 0.07
+  translation -0.63 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(1)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.38 -0.11 0.07
+  translation -0.38 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(3)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.13 -0.11 0.07
+  translation -0.13 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(4)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation 0.12 -0.11 0.07
+  translation 0.12 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(5)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation 0.37 -0.11 0.07
+  translation 0.37 -0.05 0.07
   rotation 0 0 1 1.5708
   name "wooden box(6)"
   size 0.01 0.25 0.15
