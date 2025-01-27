@@ -10,11 +10,6 @@ robot = Robot()
 # get the time step of the current world.
 time_step = int(robot.getBasicTimeStep())
 
-# You should insert a getDevice-like function in order to get the
-# instance of a device of the robot. Something like:
-#  motor = robot.getDevice('motorname')
-#  ds = robot.getDevice('dsname')
-#  ds.enable(timestep)
 
 max_speed = 6.28
 left_motor = robot.getMotor('left wheel motor')
@@ -30,7 +25,10 @@ irs=[]
 for i in range(8):
     irs.append(robot.getDevice(f'ps{i}'))
     irs[-1].enable(time_step)
-    
+
+ground = robot.getDevice('gs0')
+ground.enable(time_step)
+
 
 left_ir = irs[5]
 right_ir = irs[2]
@@ -48,27 +46,41 @@ def is_back_obastacle():
 
 move()
 
+def ensure_right_direction():
+    if(is_front_obastacle()):
+        move(-max_speed)
+    elif(is_back_obastacle()):
+        move(max_speed)    
+
+WHITE, BLACK = 1, 0
+
+last_seen_color = WHITE
+
+def switched_tiles():
+    if ground.getValue():
+    
+
+current_tile = 0
+
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
 while robot.step(time_step) != -1:
-    # Read the sensors:
-    # Enter here functions to read sensor data, like:
-    #  val = ds.getValue()
-
-    # Process sensor data here.
-
-    # Enter here functions to send actuator commands, like:
-    #  motor.setPosition(10.0)
+    ensure_right_direction()
     
-    front, back = is_front_obastacle(), is_back_obastacle()
+    if switched_tiles():
+        
     
-    if(front):
-        move(-max_speed)
-    elif(back):
-        move(max_speed)
+    print(ground.getValue())
+        
 
         
-    print(left_ir.getValue(), right_ir.getValue(), "\n")
+    # print(left_ir.getValue(), right_ir.getValue(), "\n")
     pass
 
-# Enter here exit cleanup code.
+
+
+
+
+
+
+

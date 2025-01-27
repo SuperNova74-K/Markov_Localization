@@ -5,12 +5,14 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Roughcast.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.3958116768362616 0.04149386296113418 0.917393795388125 2.9724962316449024
-  position 0.08124951297382457 -0.05789298492231995 0.804026792465723
+  orientation -0.33672203949463586 -0.061332221862217075 0.9396045054596196 3.537227261513661
+  position 1.0707371546684994 0.40831410108838895 0.851979779796965
 }
 TexturedBackground {
 }
@@ -22,20 +24,19 @@ RectangleArena {
   wallHeight 0.001
 }
 E-puck {
-  hidden position_0_0 106.35175241764301
-  hidden position_0_1 106.35175191094243
-  hidden rotation_1 0 1 0 5.82078750276963
-  hidden rotation_2 0 1 0 5.820786996069042
-  translation -0.875653 -0.00183109 -0.000776366
-  rotation 2.3939685955035255e-06 -0.9999999736639869 -0.00022949138260500198 0.0011490564228172156
+  hidden position_0_0 171.42358161713543
+  hidden position_0_1 171.42358159753826
+  hidden linearVelocity_0 -0.1255938242806399 4.336515909279191e-06 0.00020604763484072784
+  hidden angularVelocity_0 -3.3343155257051555e-07 0.0005230057610388326 2.3822796691958316e-07
+  hidden rotation_1 0 -1 0 4.505606983892996
+  hidden linearVelocity_1 -0.12558953920896967 4.33199581665571e-06 0.00019034779417467662
+  hidden angularVelocity_1 -0.00021651490265498297 -6.279476990493448 -3.1875567318613586e-07
+  hidden rotation_2 0 -1 0 4.505607003490162
+  hidden linearVelocity_2 -0.12558953973607034 4.332307482566521e-06 0.00019037349591357423
+  hidden angularVelocity_2 -0.00021670025761911504 -6.279476990508149 -1.2343863036774084e-07
+  translation -0.07756002140383542 -0.0018257470472586455 0.009909684528256713
+  rotation 7.318746397949696e-05 0.9993733123711983 -0.035397417473799805 0.0009722930668223471
   controller "Markov_Localization"
-  groundSensorsSlot [
-    DistanceSensor {
-      translation 6.74634e-14 0 0.01
-      rotation 0 1 0 1.5708
-      name "color0"
-    }
-  ]
 }
 WoodenBox {
   translation -1.01 0 0.07
@@ -99,4 +100,62 @@ WoodenBox {
   rotation 0 0 1 1.5708
   name "wooden box(6)"
   size 0.01 0.25 0.15
+}
+Wall {
+  translation 0.12 0 0
+  size 0.25 0.1 0.01
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation -0.38 0 0
+  name "wall(2)"
+  size 0.25 0.1 0.01
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation -0.88 0 0
+  name "wall(3)"
+  size 0.25 0.1 0.01
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
+}
+Wall {
+  translation -0.63 0 0
+  name "wall(4)"
+  size 0.25 0.1 0.01
+}
+Wall {
+  translation -0.13 0 0
+  name "wall(5)"
+  size 0.25 0.1 0.01
+}
+Wall {
+  translation 0.37 0 0
+  name "wall(6)"
+  size 0.25 0.1 0.01
+}
+Wall {
+  translation 0.62 0 0
+  name "wall(1)"
+  size 0.25 0.1 0.01
+  appearance Roughcast {
+    colorOverride 0 0 0
+    textureTransform TextureTransform {
+      scale 2.4 1
+    }
+  }
 }
