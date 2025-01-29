@@ -11,8 +11,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.4225232587918797 0.13068712664271978 -0.8968806892278146 2.5552016816781338
-  position -0.40636341665417886 0.25795451628267896 0.5964485911281302
+  orientation 0.22427056390796513 0.9047668450373665 -0.3620768844949005 1.1099301450601642
+  position -1.4063527547878654 0.2784307430101482 1.1460992140076347
 }
 TexturedBackground {
   luminosity 10
@@ -26,12 +26,12 @@ RectangleArena {
   wallHeight 0.001
 }
 E-puck {
-  hidden position_0_0 371.907293783505
-  hidden position_0_1 371.90729375460677
-  hidden rotation_1 0 1 0 2.9769389831959856
-  hidden rotation_2 0 1 0 2.976938934700593
-  translation -0.921876 -1.09035e-07 -7.16442e-05
-  rotation -0.00028013047007285105 -0.9999999408395219 -0.0001996193188488509 1.0820437644795137e-05
+  hidden position_0_0 688.8949008481854
+  hidden position_0_1 688.8949008189596
+  hidden rotation_1 0 0.9999999999999999 0 5.805280688897108
+  hidden rotation_2 0 0.9999999999999999 0 5.805280640074129
+  translation -0.888512 -0.00500002 0.000382986
+  rotation 4.032930600715303e-06 0.9999999980014911 -6.309321047450599e-05 0.0007208745453666854
   controller "Markov_Localization"
   groundSensorsSlot [
     Camera {
@@ -58,33 +58,33 @@ WoodenBox {
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.88 0.05 0.07
+  translation -0.88 0.04 0.07
   rotation 0 0 1 1.5708
   name "wooden box(8)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation -0.63 0.09 0.07
-  rotation 0 0 1 1.5708
-  name "wooden box(11)"
-  size 0.01 0.25 0.15
-}
-WoodenBox {
-  translation 0.12 0.0900003 0.07
-  rotation 0 0 1 1.5708
-  name "wooden box(12)"
-  size 0.01 0.25 0.15
-}
-WoodenBox {
-  translation -0.13 0.05 0.07
+  translation -0.13 0.040001 0.07
   rotation 0 0 1 1.5708
   name "wooden box(9)"
   size 0.01 0.25 0.15
 }
 WoodenBox {
-  translation 0.37 0.05 0.07
+  translation 0.37 0.0400019 0.07
   rotation 0 0 1 1.5708
   name "wooden box(10)"
+  size 0.01 0.25 0.15
+}
+WoodenBox {
+  translation -0.63 0.046 0.07
+  rotation 0 0 1 1.5708
+  name "wooden box(11)"
+  size 0.01 0.25 0.15
+}
+WoodenBox {
+  translation 0.12 0.0460013 0.07
+  rotation 0 0 1 1.5708
+  name "wooden box(12)"
   size 0.01 0.25 0.15
 }
 WoodenBox {

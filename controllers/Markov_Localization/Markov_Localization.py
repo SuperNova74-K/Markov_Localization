@@ -1,15 +1,10 @@
 """Markov_Localization controller."""
-
-# You may need to import some classes of the controller module. Ex:
-#  from controller import Robot, Motor, DistanceSensor
 from controller import Robot, Camera
 import cupy as np
 
 
-# create the Robot instance.
 robot = Robot()
 
-# get the time step of the current world.
 time_step = int(robot.getBasicTimeStep())
 
 
@@ -91,33 +86,86 @@ def switched_tiles():
         return True
     return False
 
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+plot_number = 0
+
+def plot_beliefs(vector):
+    global plot_number
+    # Reshape to a 2D array (single-row heatmap)
+    heatmap_data = vector.reshape(1, -1)
+
+    # Plot the heatmap with fixed color scale (0 to 1)
+    fig, ax = plt.subplots(figsize=(8, 1.5))
+    sns.heatmap(heatmap_data, cmap='flare', cbar=True, xticklabels=False, yticklabels=False, ax=ax, vmin=0, vmax=1, fmt=".2f", annot_kws={"size": 10})
+
+    # Remove axis labels
+    plt.axis('off')
+
+    save_path = f"C:/Users/kingk/Documents/webots/Markov_Localization/Results/{plot_number}"
+    # Save the heatmap
+    plt.savefig(save_path, dpi=250, bbox_inches='tight', pad_inches=0.5)
+    plt.close()
+    plot_number += 1
 
 markov_beliefs = [1/7] * 7
+markov_beliefs = np.asarray(markov_beliefs)
 
-wall = [1, 0, 0, 1, 0, 1, 0]
-open_door = [0, 1, 0, 0, 1, 0, 0]
-open_hallway = [0, 0, 1, 0, 0, 0, 1]
+plot_beliefs(markov_beliefs)
+
+definition_matrix = [
+    [1, 0, 0, 1, 0, 1, 0],
+    [0, 1, 0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1]
+]
+definition_matrix = numpy.array(definition_matrix)
+
+# wall = [1, 0, 0, 1, 0, 1, 0]
+# open_door = [0, 1, 0, 0, 1, 0, 0]
+# open_hallway = [0, 0, 1, 0, 0, 0, 1]
+
+sensor_probability_matrix = [
+    [0.7, 0.05, 0.001],
+    [0.1 ,0.9, 0.1],
+    [0, 0.001, 0.90]
+]
+sensor_probability_matrix = numpy.array(sensor_probability_matrix)
+
+class sensing_states:
+    def __init__(self):
+        self.wall = 0
+        self.open_door = 1
+        self.open_hallway = 2
+
+sensing_states = sensing_states()
 
 def sensed_status():
-    left_ir.getValue()
+    value = left_ir.getValue()
+    if value > 200:
+        return sensing_states.wall
+    elif value > 100:
+        return sensing_states.open_door
+    else:
+        return sensing_states.open_hallway
 
-# Main loop:
-# - perform simulation steps until Webots is stopping the controller
+
 while robot.step(time_step) != -1:
     ensure_right_direction()
 
-    print(left_ir.getValue())    
-    # if switched_tiles():
-    #     current_tile_index += movement_direction
-    #     print(f"We are On{current_tile_index}")
-    #
-    #     # Markov
-    #     sensed_status()
+    if switched_tiles():
+        current_tile_index += movement_direction
+        print(f"We are On{current_tile_index}")
 
+        # Markov
+        status = sensed_status()
+        sense_vector = sensor_probability_matrix[status] @ definition_matrix
+        update_vector = markov_beliefs * sense_vector
+        normalized_result = update_vector / np.sum(update_vector)
 
+        # updating our beliefs
+        markov_beliefs = normalized_result
+        markov_beliefs = np.roll(markov_beliefs, 1)
+        markov_beliefs[0] = 0
 
-
-
-
-
-
+        plot_beliefs(markov_beliefs)
