@@ -1,12 +1,10 @@
 """Markov_Localization controller."""
 from controller import Robot, Camera
-import cupy as np
-
+import cupy as cp
 
 robot = Robot()
 
 time_step = int(robot.getBasicTimeStep())
-
 
 max_speed = 6.28
 left_motor = robot.getMotor('left wheel motor')
@@ -62,13 +60,13 @@ def get_ground_tile_color():
     image = ground_camera.getImage()
 
     # Convert to NumPy array and reshape to (height, width, 4) since Webots uses BGRA
-    img_array = np.frombuffer(image, dtype=np.uint8).reshape((ground_camera.getHeight(), ground_camera.getWidth(), 4))
+    img_array = cp.frombuffer(image, dtype=cp.uint8).reshape((ground_camera.getHeight(), ground_camera.getWidth(), 4))
 
     # Extract RGB channels and compute grayscale
     grayscale_matrix = img_array[:, :, :3].mean(axis=2)  # Average RGB channels
 
     # Compute average grayscale value
-    avg_grayscale = np.mean(grayscale_matrix)
+    avg_grayscale = cp.mean(grayscale_matrix)
 
     # Determine if tile is black or white
     return WHITE if avg_grayscale > 127 else BLACK  # Thresholding at 127
@@ -86,7 +84,7 @@ def switched_tiles():
         return True
     return False
 
-import numpy as np
+import numpy as cp
 import seaborn as sns
 import matplotlib.pyplot as plt
 plot_number = 0
@@ -110,7 +108,7 @@ def plot_beliefs(vector):
     plot_number += 1
 
 markov_beliefs = [1/7] * 7
-markov_beliefs = np.asarray(markov_beliefs)
+markov_beliefs = cp.asarray(markov_beliefs)
 
 plot_beliefs(markov_beliefs)
 
@@ -119,7 +117,7 @@ definition_matrix = [
     [0, 1, 0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0, 0, 1]
 ]
-definition_matrix = numpy.array(definition_matrix)
+definition_matrix = cp.array(definition_matrix)
 
 # wall = [1, 0, 0, 1, 0, 1, 0]
 # open_door = [0, 1, 0, 0, 1, 0, 0]
@@ -130,7 +128,7 @@ sensor_probability_matrix = [
     [0.1 ,0.9, 0.1],
     [0, 0.001, 0.90]
 ]
-sensor_probability_matrix = numpy.array(sensor_probability_matrix)
+sensor_probability_matrix = cp.array(sensor_probability_matrix)
 
 class sensing_states:
     def __init__(self):
@@ -161,11 +159,11 @@ while robot.step(time_step) != -1:
         status = sensed_status()
         sense_vector = sensor_probability_matrix[status] @ definition_matrix
         update_vector = markov_beliefs * sense_vector
-        normalized_result = update_vector / np.sum(update_vector)
+        normalized_result = update_vector / cp.sum(update_vector)
 
         # updating our beliefs
         markov_beliefs = normalized_result
-        markov_beliefs = np.roll(markov_beliefs, 1)
+        markov_beliefs = cp.roll(markov_beliefs, 1)
         markov_beliefs[0] = 0
 
         plot_beliefs(markov_beliefs)
